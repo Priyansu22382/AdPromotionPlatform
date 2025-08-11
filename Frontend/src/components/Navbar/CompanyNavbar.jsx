@@ -38,7 +38,7 @@ const CompanyNavbar = () => {
   };
 
   return (
-    <nav className="bg-black/60 backdrop-blur-md text-gray-200 px-6 py-4 flex flex-col md:flex-row justify-between items-center sticky top-0 z-10 border-b border-gray-700 shadow-lg shadow-purple-900/50">
+    <nav className="bg-black text-gray-200 px-6 py-4 flex flex-col md:flex-row justify-between items-center sticky top-0 z-10 border-b border-gray-700 shadow-lg shadow-purple-900/50">
       <div className="flex items-center space-x-2 text-2xl font-bold text-white drop-shadow-sm mb-4 md:mb-0">
         <span className="text-purple-400">Company</span> Panel
       </div>
