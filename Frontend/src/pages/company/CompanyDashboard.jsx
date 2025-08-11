@@ -109,7 +109,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../lib/axios";
-import { PlusCircle, FileText, BarChart2, LogOut, ShieldCheck, Gauge, Layers, Bell } from "lucide-react";
+import { PlusCircle, FileText, BarChart2, LogOut, ShieldCheck, Layers, Bell } from "lucide-react";
 
 const CompanyDashboard = () => {
   const [ads, setAds] = useState([]);
@@ -138,49 +138,23 @@ const CompanyDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-gray-950 to-black text-gray-200">
+    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-950 to-black text-gray-200">
       {/* Animated background overlay */}
       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
 
-      {/* Sidebar */}
-      <div className="hidden md:flex flex-col w-64 bg-gray-900/50 p-6 border-r border-gray-800 shadow-xl shadow-gray-950/50">
-        <div className="flex items-center space-x-4 mb-10">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-400/10 text-teal-400 shadow-lg shadow-teal-900/50">
-            <ShieldCheck size={28} strokeWidth={2} />
-          </div>
-          <span className="text-xl font-bold text-white">Company Panel</span>
-        </div>
-        <nav className="flex-1 space-y-2">
-          <Link to="/company" className="flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 hover:bg-teal-400/20 hover:text-white">
-            <Gauge size={20} />
-            <span className="font-medium">Dashboard</span>
-          </Link>
-          <Link to="/company/create-ad" className="flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 hover:bg-teal-400/20 hover:text-white">
-            <PlusCircle size={20} />
-            <span className="font-medium">Create Ad</span>
-          </Link>
-          <Link to="/company/ads" className="flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 hover:bg-teal-400/20 hover:text-white">
-            <FileText size={20} />
-            <span className="font-medium">My Ads</span>
-          </Link>
-        </nav>
-        <button
-          onClick={handleLogout}
-          className="mt-6 flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 text-red-400 hover:bg-red-400/20 hover:text-red-300"
-        >
-          <LogOut size={20} />
-          <span className="font-medium">Logout</span>
-        </button>
-      </div>
-
       {/* Main Content */}
-      <div className="z-10 flex-1 p-8 md:p-12 overflow-y-auto animate-fade-in">
-        <header className="flex justify-between items-center mb-10">
-          <div>
-            <h1 className="text-4xl font-bold text-white drop-shadow-sm">Welcome Back</h1>
-            <p className="mt-2 text-gray-400 text-lg">
-              Manage your ad campaigns and connect with cab drivers.
-            </p>
+      <div className="z-10 w-full max-w-5xl">
+        <header className="flex justify-between items-center mb-10 p-4 border-b border-gray-700">
+          <div className="flex items-center space-x-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-400/10 text-teal-400 shadow-lg shadow-teal-900/50">
+              <ShieldCheck size={32} strokeWidth={2} />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-white drop-shadow-sm">Welcome Back</h1>
+              <p className="mt-1 text-gray-400">
+                Manage your ad campaigns and connect with cab drivers.
+              </p>
+            </div>
           </div>
           <div className="flex items-center space-x-4">
             <button className="text-gray-400 hover:text-teal-400 transition-colors">
