@@ -359,12 +359,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
+    <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-gray-900 to-black text-gray-200">
       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
 
-      <div className="z-10 w-96 rounded-3xl border border-white/30 bg-white/10 p-10 shadow-2xl backdrop-blur-md">
+      <div className="z-10 w-96 rounded-3xl border border-gray-700 bg-gray-800/60 p-10 shadow-2xl shadow-purple-900/50 backdrop-blur-md transition-shadow duration-300 hover:shadow-xl">
         {/* Icon */}
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white shadow-lg transition-transform duration-300 hover:scale-110">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white shadow-lg shadow-purple-900/50 transition-transform duration-300 hover:scale-110">
           <ShieldCheck size={32} strokeWidth={2} />
         </div>
 
@@ -372,7 +372,7 @@ const LoginPage = () => {
         <h2 className="mb-2 text-center text-3xl font-bold text-white drop-shadow-sm">
           Welcome Back
         </h2>
-        <p className="mb-8 text-center text-sm text-gray-200">
+        <p className="mb-8 text-center text-sm text-gray-400">
           Sign in to your account to continue.
         </p>
 
@@ -387,7 +387,7 @@ const LoginPage = () => {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
             />
           </div>
 
@@ -400,11 +400,11 @@ const LoginPage = () => {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-28 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-28 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
             />
             <button
               type="button"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-gray-300 transition-colors hover:text-white"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-purple-400 transition-colors hover:text-purple-300"
               onClick={() => navigate("/forgot-password")}
             >
               Forgot?
@@ -415,7 +415,7 @@ const LoginPage = () => {
             name="role"
             value={formData.role}
             onChange={handleChange}
-            className="w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 py-3 pl-4 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+            className="w-full cursor-pointer rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-4 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
           >
             <option value="cab-driver" className="bg-gray-800 text-white">
               Cab Driver
@@ -430,7 +430,7 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-gradient-to-r from-teal-400 to-emerald-500 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+            className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-700 py-3 font-semibold text-white shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-900/70 active:scale-95"
           >
             Sign In
           </button>
@@ -438,20 +438,20 @@ const LoginPage = () => {
 
         {/* Divider */}
         <div className="my-8 flex items-center">
-          <div className="flex-grow border-t border-gray-600"></div>
-          <span className="mx-4 text-sm text-gray-300">or sign in with</span>
-          <div className="flex-grow border-t border-gray-600"></div>
+          <div className="flex-grow border-t border-gray-700"></div>
+          <span className="mx-4 text-sm text-gray-400">or sign in with</span>
+          <div className="flex-grow border-t border-gray-700"></div>
         </div>
         
         {/* Google Login Button */}
         <GoogleLoginButton />
 
         {/* Sign up link */}
-        <p className="mt-8 text-center text-sm text-gray-300">
+        <p className="mt-8 text-center text-sm text-gray-400">
           Don't have an account?{" "}
           <button
             onClick={() => navigate("/signup")}
-            className="font-semibold text-white transition-colors hover:text-teal-300 hover:underline"
+            className="font-semibold text-purple-400 transition-colors hover:text-purple-300 hover:underline"
           >
             Sign Up
           </button>

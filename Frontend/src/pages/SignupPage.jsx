@@ -205,7 +205,7 @@ import { axiosInstance } from "../lib/axios";
 // You should replace the 'alert' calls with a custom modal for better UX.
 const showErrorMessage = (message) => {
   console.error("Signup Error:", message);
-  // alert(message); // Replaced with a custom solution
+  // Replaced alert with a custom solution for better user experience.
 };
 
 const SignupPage = () => {
@@ -260,14 +260,14 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
+    <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-gray-900 to-black text-gray-200">
       {/* Animated background overlay */}
       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
 
       {/* Main content container */}
-      <div className="z-10 w-96 rounded-3xl border border-white/30 bg-white/10 p-10 shadow-2xl backdrop-blur-md">
+      <div className="z-10 w-96 rounded-3xl border border-gray-700 bg-gray-800/60 p-10 shadow-2xl shadow-purple-900/50 backdrop-blur-md transition-shadow duration-300 hover:shadow-xl">
         {/* Icon */}
-        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white shadow-lg transition-transform duration-300 hover:scale-110">
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white shadow-lg shadow-purple-900/50 transition-transform duration-300 hover:scale-110">
           <ShieldCheck size={32} strokeWidth={2} />
         </div>
 
@@ -275,7 +275,7 @@ const SignupPage = () => {
         <h2 className="mb-2 text-center text-3xl font-bold text-white drop-shadow-sm">
           Create an account
         </h2>
-        <p className="mb-8 text-center text-sm text-gray-200">
+        <p className="mb-8 text-center text-sm text-gray-400">
           Join our ad management platform and start exploring.
         </p>
 
@@ -291,7 +291,7 @@ const SignupPage = () => {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
             />
           </div>
 
@@ -305,7 +305,7 @@ const SignupPage = () => {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
             />
           </div>
 
@@ -319,7 +319,7 @@ const SignupPage = () => {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
             />
           </div>
 
@@ -331,7 +331,7 @@ const SignupPage = () => {
               required
               value={formData.role}
               onChange={handleChange}
-              className="w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+              className="w-full cursor-pointer rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
             >
               <option value="company" className="bg-gray-800 text-white">Company</option>
               <option value="cab-driver" className="bg-gray-800 text-white">Cab Driver</option>
@@ -350,7 +350,7 @@ const SignupPage = () => {
                   required
                   value={formData.vehicleNumber}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+                  className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
                 />
               </div>
               <div className="relative">
@@ -362,7 +362,7 @@ const SignupPage = () => {
                   required
                   value={formData.platform}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+                  className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
                 />
               </div>
               <div className="relative">
@@ -374,7 +374,7 @@ const SignupPage = () => {
                   required
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+                  className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
                 />
               </div>
             </div>
@@ -391,7 +391,7 @@ const SignupPage = () => {
                   required
                   value={formData.companyName}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
+                  className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 hover:scale-[1.02] hover:shadow-md hover:shadow-purple-900/30"
                 />
               </div>
             </div>
@@ -400,18 +400,18 @@ const SignupPage = () => {
           {/* Submit button with transitions */}
           <button
             type="submit"
-            className="w-full rounded-xl bg-gradient-to-r from-teal-400 to-emerald-500 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+            className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-700 py-3 font-semibold text-white shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-900/70 active:scale-95"
           >
             Create Account
           </button>
         </form>
 
         {/* Link to login page */}
-        <p className="mt-8 text-center text-sm text-gray-300">
+        <p className="mt-8 text-center text-sm text-gray-400">
           Already have an account?{" "}
           <button
             onClick={() => navigate("/login")}
-            className="font-semibold text-white transition-colors hover:text-teal-300 hover:underline"
+            className="font-semibold text-purple-400 transition-colors hover:text-purple-300 hover:underline"
           >
             Sign In
           </button>
