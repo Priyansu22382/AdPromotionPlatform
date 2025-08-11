@@ -199,7 +199,6 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, BadgeCheck, Car, Phone, Layers, Building2, ShieldCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { axiosInstance } from "../lib/axios";
 
 // This is a placeholder for a custom modal component.
@@ -260,40 +259,17 @@ const SignupPage = () => {
     }
   };
 
-  // Framer Motion variants for the main container animation
-  const formVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
-  };
-
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
       {/* Animated background overlay */}
       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
 
-      {/* Main content container with a spring animation */}
-      <motion.div
-        className="z-10 w-96 rounded-3xl border border-white/30 bg-white/10 p-10 shadow-2xl backdrop-blur-md"
-        initial="hidden"
-        animate="visible"
-        variants={formVariants}
-      >
-        {/* Animated icon */}
-        <motion.div
-          className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white shadow-lg"
-          whileHover={{ scale: 1.1, rotate: 10 }}
-          transition={{ type: "spring", stiffness: 400 }}
-        >
+      {/* Main content container */}
+      <div className="z-10 w-96 rounded-3xl border border-white/30 bg-white/10 p-10 shadow-2xl backdrop-blur-md">
+        {/* Icon */}
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white shadow-lg transition-transform duration-300 hover:scale-110">
           <ShieldCheck size={32} strokeWidth={2} />
-        </motion.div>
+        </div>
 
         {/* Title and subtitle */}
         <h2 className="mb-2 text-center text-3xl font-bold text-white drop-shadow-sm">
@@ -306,11 +282,7 @@ const SignupPage = () => {
         {/* Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Input */}
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
+          <div className="relative">
             <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
@@ -319,16 +291,12 @@ const SignupPage = () => {
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
             />
-          </motion.div>
+          </div>
 
           {/* Email Input */}
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
+          <div className="relative">
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="email"
@@ -337,16 +305,12 @@ const SignupPage = () => {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
             />
-          </motion.div>
+          </div>
 
           {/* Password Input */}
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
+          <div className="relative">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="password"
@@ -355,43 +319,29 @@ const SignupPage = () => {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
             />
-          </motion.div>
+          </div>
 
           {/* Role Selection */}
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
+          <div className="relative">
             <BadgeCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <select
               name="role"
               required
               value={formData.role}
               onChange={handleChange}
-              className="w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+              className="w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
             >
               <option value="company" className="bg-gray-800 text-white">Company</option>
               <option value="cab-driver" className="bg-gray-800 text-white">Cab Driver</option>
             </select>
-          </motion.div>
+          </div>
 
-          {/* Additional Fields for Cab Driver - animated conditional rendering */}
+          {/* Conditional Fields */}
           {formData.role === "cab-driver" && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-6"
-            >
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
+            <div className="space-y-6 transition-all duration-300 ease-in-out">
+              <div className="relative">
                 <Car className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="text"
@@ -400,14 +350,10 @@ const SignupPage = () => {
                   required
                   value={formData.vehicleNumber}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
                 />
-              </motion.div>
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
+              </div>
+              <div className="relative">
                 <Layers className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="text"
@@ -416,14 +362,10 @@ const SignupPage = () => {
                   required
                   value={formData.platform}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
                 />
-              </motion.div>
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
+              </div>
+              <div className="relative">
                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="tel"
@@ -432,26 +374,15 @@ const SignupPage = () => {
                   required
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           )}
 
-          {/* Additional Field for Company - animated conditional rendering */}
           {formData.role === "company" && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative"
-            >
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
+            <div className="space-y-6 transition-all duration-300 ease-in-out">
+              <div className="relative">
                 <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="text"
@@ -460,21 +391,19 @@ const SignupPage = () => {
                   required
                   value={formData.companyName}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                  className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
                 />
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           )}
 
-          {/* Submit button with animations */}
-          <motion.button
+          {/* Submit button with transitions */}
+          <button
             type="submit"
             className="w-full rounded-xl bg-gradient-to-r from-teal-400 to-emerald-500 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             Create Account
-          </motion.button>
+          </button>
         </form>
 
         {/* Link to login page */}
@@ -487,9 +416,10 @@ const SignupPage = () => {
             Sign In
           </button>
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 };
 
 export default SignupPage;
+

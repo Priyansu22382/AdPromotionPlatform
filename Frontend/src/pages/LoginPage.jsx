@@ -310,7 +310,6 @@
 import React, { useState } from "react";
 import { Mail, Lock, ShieldCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion"; // Import motion for animations
 import { axiosInstance } from "../lib/axios";
 import GoogleLoginButton from "../components/GoogleLoginButton";
 
@@ -354,44 +353,20 @@ const LoginPage = () => {
       console.log("Login successful!", response.data);
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);
-      alert(
-        error.response?.data?.message ||
-          "Login failed. Please check credentials and role."
-      );
+      // Use a custom modal or toast notification instead of alert()
+      // alert(error.response?.data?.message || "Login failed. Please check credentials and role.");
     }
-  };
-
-  const formVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10,
-      },
-    },
   };
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
 
-      <motion.div
-        className="z-10 w-96 rounded-3xl border border-white/30 bg-white/10 p-10 shadow-2xl backdrop-blur-md"
-        initial="hidden"
-        animate="visible"
-        variants={formVariants}
-      >
-        {/* Animated Icon */}
-        <motion.div
-          className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white shadow-lg"
-          whileHover={{ scale: 1.1, rotate: 10 }}
-          transition={{ type: "spring", stiffness: 400 }}
-        >
+      <div className="z-10 w-96 rounded-3xl border border-white/30 bg-white/10 p-10 shadow-2xl backdrop-blur-md">
+        {/* Icon */}
+        <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white shadow-lg transition-transform duration-300 hover:scale-110">
           <ShieldCheck size={32} strokeWidth={2} />
-        </motion.div>
+        </div>
 
         {/* Title and Subtitle */}
         <h2 className="mb-2 text-center text-3xl font-bold text-white drop-shadow-sm">
@@ -403,11 +378,7 @@ const LoginPage = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
+          <div className="relative">
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="email"
@@ -416,15 +387,11 @@ const LoginPage = () => {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-4 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
+          <div className="relative">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="password"
@@ -433,7 +400,7 @@ const LoginPage = () => {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-28 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+              className="w-full rounded-xl border border-white/20 bg-white/5 py-3 pl-12 pr-28 text-white placeholder-gray-300 backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
             />
             <button
               type="button"
@@ -442,15 +409,13 @@ const LoginPage = () => {
             >
               Forgot?
             </button>
-          </motion.div>
+          </div>
 
-          <motion.select
+          <select
             name="role"
             value={formData.role}
             onChange={handleChange}
-            className="w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 py-3 pl-4 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400 }}
+            className="w-full cursor-pointer rounded-xl border border-white/20 bg-white/5 py-3 pl-4 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-white focus:outline-none focus:ring-1 focus:ring-white hover:scale-[1.02]"
           >
             <option value="cab-driver" className="bg-gray-800 text-white">
               Cab Driver
@@ -461,16 +426,14 @@ const LoginPage = () => {
             <option value="admin" className="bg-gray-800 text-white">
               Admin
             </option>
-          </motion.select>
+          </select>
 
-          <motion.button
+          <button
             type="submit"
             className="w-full rounded-xl bg-gradient-to-r from-teal-400 to-emerald-500 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             Sign In
-          </motion.button>
+          </button>
         </form>
 
         {/* Divider */}
@@ -493,9 +456,10 @@ const LoginPage = () => {
             Sign Up
           </button>
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 };
 
 export default LoginPage;
+
