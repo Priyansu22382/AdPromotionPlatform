@@ -110,7 +110,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../lib/axios";
-import { PlusCircle, FileText, BarChart2, LogOut, ShieldCheck } from "lucide-react";
+import { PlusCircle, FileText, BarChart2, ShieldCheck } from "lucide-react";
 
 const CompanyDashboard = () => {
   const [ads, setAds] = useState([]);
@@ -129,113 +129,95 @@ const CompanyDashboard = () => {
     fetchAds();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await axiosInstance.post("/auth/company/logout", {}, { withCredentials: true });
-      navigate("/login");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
-  };
-
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-900 to-black text-gray-200">
+    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-950 to-black text-gray-200">
       {/* Animated background overlay */}
       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
-      
-      {/* Dashboard content */}
+
+      {/* Main Content */}
       <div className="z-10 w-full max-w-5xl">
         <header className="flex justify-between items-center mb-10 p-4 border-b border-gray-700">
           <div className="flex items-center space-x-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white shadow-lg shadow-purple-900/50">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-400/10 text-teal-400 shadow-lg shadow-teal-900/50">
               <ShieldCheck size={32} strokeWidth={2} />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white drop-shadow-sm">Company Dashboard</h1>
+              <h1 className="text-3xl font-bold text-white drop-shadow-sm">Welcome Back</h1>
               <p className="mt-1 text-gray-400">
                 Manage your ad campaigns and connect with cab drivers.
               </p>
             </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center space-x-2 bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-900/70 active:scale-95"
-          >
-            <LogOut size={20} />
-            <span>Logout</span>
-          </button>
         </header>
 
-        {/* Grid for Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        {/* Action and Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
           {/* Create Ad Card */}
           <Link
             to="/company/create-ad"
-            className="bg-gray-800/60 rounded-xl border border-gray-700 p-6 shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-900/70"
+            className="group bg-gray-900/50 rounded-2xl border border-gray-800 p-8 shadow-xl shadow-gray-950/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-teal-900/50"
           >
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-medium text-white">Create New Ad</h2>
-              <PlusCircle className="text-purple-400" size={24} />
-            </div>
+            <PlusCircle className="text-teal-400 group-hover:text-white transition-colors" size={32} />
+            <h2 className="text-xl font-bold text-white mt-4">Create New Ad</h2>
             <p className="text-sm text-gray-400 mt-2">
-              Publish a new ad campaign and choose your target city, budget, and vehicle type.
+              Publish a new ad campaign with custom budget, city, and vehicle types.
             </p>
           </Link>
 
           {/* View Ads Card */}
           <Link
             to="/company/ads"
-            className="bg-gray-800/60 rounded-xl border border-gray-700 p-6 shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-900/70"
+            className="group bg-gray-900/50 rounded-2xl border border-gray-800 p-8 shadow-xl shadow-gray-950/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-teal-900/50"
           >
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-medium text-white">View My Ads</h2>
-              <FileText className="text-purple-400" size={24} />
-            </div>
+            <FileText className="text-teal-400 group-hover:text-white transition-colors" size={32} />
+            <h2 className="text-xl font-bold text-white mt-4">View My Ads</h2>
             <p className="text-sm text-gray-400 mt-2">
               Check all ads you've created, their current status, and edit or delete them.
             </p>
           </Link>
 
           {/* Engagement Stats Card */}
-          <div className="bg-gray-800/60 rounded-xl border border-gray-700 p-6 shadow-lg shadow-purple-900/50">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-medium text-white">Engagement Stats</h2>
-              <BarChart2 className="text-purple-400" size={24} />
-            </div>
+          <div className="bg-gray-900/50 rounded-2xl border border-gray-800 p-8 shadow-xl shadow-gray-950/50">
+            <BarChart2 className="text-teal-400" size={32} />
+            <h2 className="text-xl font-bold text-white mt-4">Engagement Stats</h2>
             <p className="text-sm text-gray-400 mt-2">
-              Total Views: <span className="font-semibold text-purple-400">12,340</span><br />
-              Clicks: <span className="font-semibold text-purple-400">3,210</span><br />
-              Active Ads: <span className="font-semibold text-purple-400">{ads.filter(ad => ad.status === "Approved").length}</span>
+              Total Views: <span className="font-semibold text-teal-400">12,340</span><br />
+              Clicks: <span className="font-semibold text-teal-400">3,210</span><br />
+              Active Ads: <span className="font-semibold text-teal-400">{ads.filter(ad => ad.status === "Approved").length}</span>
             </p>
           </div>
         </div>
 
         {/* Assigned Drivers */}
-        <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4 text-white">🚗 Assigned Cab Drivers</h2>
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-white mb-6">🚗 Assigned Cab Drivers</h2>
           {ads.filter(ad => ad.status === "Approved" && ad.assignedDrivers.length > 0).length === 0 ? (
-            <p className="text-gray-400">No assigned cab drivers yet.</p>
+            <div className="p-8 bg-gray-900/50 rounded-2xl text-center border border-gray-800">
+                <p className="text-gray-400 text-lg">No assigned cab drivers yet.</p>
+            </div>
           ) : (
-            ads
-              .filter(ad => ad.status === "Approved" && ad.assignedDrivers.length > 0)
-              .map((ad, index) => (
-                <div key={index} className="mb-6 bg-gray-800/60 rounded-xl shadow-lg shadow-purple-900/50 border border-gray-700 p-4 transition-all duration-300 hover:scale-[1.01]">
-                  <h3 className="text-md font-semibold mb-2 text-white">📌 Ad: {ad.adTitle}</h3>
-                  <ul className="divide-y divide-gray-700">
-                    {ad.assignedDrivers.map((driver, idx) => (
-                      <li key={idx} className="py-3 flex justify-between items-center">
-                        <div>
-                          <strong>Driver:</strong> {driver.name}<br />
-                          <strong>Vehicle:</strong> {driver.vehicleNumber} ({driver.platform})
-                        </div>
-                        <span className={`font-medium ${driver.isAvailable ? "text-green-400" : "text-yellow-400"}`}>
-                          {driver.isAvailable ? "Active" : "Assigned"}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))
+            <div className="space-y-6">
+                {ads
+                .filter(ad => ad.status === "Approved" && ad.assignedDrivers.length > 0)
+                .map((ad, index) => (
+                    <div key={index} className="bg-gray-900/50 rounded-2xl shadow-xl shadow-gray-950/50 border border-gray-800 p-6 transition-all duration-300 hover:scale-[1.01] hover:shadow-teal-900/50">
+                    <h3 className="text-lg font-bold text-teal-400 mb-3">📌 Ad: {ad.adTitle}</h3>
+                    <ul className="divide-y divide-gray-800">
+                        {ad.assignedDrivers.map((driver, idx) => (
+                        <li key={idx} className="py-3 flex justify-between items-center">
+                            <div>
+                            <p className="font-semibold text-white">Driver: <span className="font-normal text-gray-300">{driver.name}</span></p>
+                            <p className="text-sm text-gray-400">Vehicle: {driver.vehicleNumber} ({driver.platform})</p>
+                            </div>
+                            <span className={`font-medium px-3 py-1 rounded-full text-xs ${driver.isAvailable ? "bg-green-600/30 text-green-400" : "bg-yellow-600/30 text-yellow-400"}`}>
+                            {driver.isAvailable ? "Active" : "Assigned"}
+                            </span>
+                        </li>
+                        ))}
+                    </ul>
+                    </div>
+                ))}
+            </div>
           )}
         </div>
       </div>
@@ -244,3 +226,4 @@ const CompanyDashboard = () => {
 };
 
 export default CompanyDashboard;
+
