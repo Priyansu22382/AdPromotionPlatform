@@ -2,7 +2,7 @@
 
 An innovative **full-stack MERN** platform designed to connect **companies** with **cab drivers** for advertising campaigns. Admins manage ad requests, assign them to available drivers, and track engagement — all in one place.  
 
-![AdPromotionPlatform Banner](https://your-banner-image-link.com)  
+![AdPromotionPlatform Banner](https://adpromotionplatform.netlify.app/)  
 
 ---
 
