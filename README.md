@@ -1,60 +1,79 @@
-🎯 AdPromotion – AI-Enabled Vehicle Advertising Management Platform
-AdPromotion is a full-stack advertising management system that connects companies with cab drivers to run targeted, location-based ad campaigns.
+# 🚖 AdPromotionPlatform  
 
-The platform enables companies to design ad campaigns, assign them to drivers, and track execution — while providing drivers with tools to view ads, download creatives, and update their status. Built using the MERN stack, it includes secure authentication, Google OAuth integration, and real-time updates for both sides.
+An innovative **full-stack MERN** platform designed to connect **companies** with **cab drivers** for advertising campaigns. Admins manage ad requests, assign them to available drivers, and track engagement — all in one place.  
 
-🚀 Live Demo
-Visit AdPromotion →
+![AdPromotionPlatform Banner](https://your-banner-image-link.com)  
 
-📌 Table of Contents
-Features
+---
 
-Tech Stack
+## 📜 Table of Contents  
+- [✨ Features](#-features)  
+- [🛠 Tech Stack](#-tech-stack)  
+- [📂 Project Structure](#-project-structure)  
+- [⚙️ Installation](#️-installation)  
+- [🚀 Usage](#-usage)  
+- [🔐 Authentication & Roles](#-authentication--roles)  
+- [📸 Screenshots](#-screenshots)  
+- [🤝 Contributing](#-contributing)  
+- [📄 License](#-license)  
 
-System Architecture
+---
 
-Getting Started
+## ✨ Features  
 
-API Endpoints
+### 👨‍💼 **Admin**  
+- View, approve, reject, and delete ad requests  
+- Assign approved ads to available cab drivers  
+- Manage cab driver availability and details  
 
-Project Structure
+### 🏢 **Company**  
+- Submit ad requests with media and details  
+- Edit or delete pending requests  
+- View status updates in real time  
 
-Future Enhancements
+### 🚖 **Cab Driver**  
+- Accept assigned ads  
+- Track assigned campaigns  
+- Upload verification documents  
 
-License
+---
 
-✨ Features
-🏢 Company Dashboard
-Create and manage ad campaigns.
+## 🛠 Tech Stack  
 
-Upload creative assets (images, descriptions).
+**Frontend**  
+- ⚛️ React.js (Vite)  
+- 🎨 Tailwind CSS (Responsive UI)  
 
-Assign campaigns to cab drivers.
+**Backend**  
+- 🟢 Node.js + Express.js  
+- 📦 MongoDB (Mongoose ODM)  
 
-Track assigned ads and their status.
+**Authentication & Security**  
+- 🔑 JWT (Role-based authentication)  
+- 🛡 bcrypt (Password hashing)  
 
-🚖 Cab Driver Dashboard
-View assigned campaigns in real-time.
+**Others**  
+- ☁ Cloudinary (Image/Document Uploads)  
+- 📡 Axios (API communication)  
 
-Download ad creatives as PDF for printing.
+---
 
-Update ad status and availability.
+## 📂 Project Structure  
 
-Upload required verification documents.
-
-🔐 Authentication & Security
-Role-based authentication (Company, Cab Driver).
-
-Google OAuth 2.0 and email/password login.
-
-Secure password reset via email (Nodemailer).
-
-Password hashing with bcrypt.
-
-📤 Extra Features
-Real-time campaign assignment updates.
-
-PDF generation for ad creatives.
-
-Cross-origin secure downloads.
-
+AdPromotionPlatform/
+│
+├── backend/
+│ ├── controllers/
+│ ├── middlewares/
+│ ├── models/
+│ ├── routes/
+│ ├── server.js
+│
+├── frontend/
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── services/
+│ │ ├── App.jsx
+│
+└── README.md
