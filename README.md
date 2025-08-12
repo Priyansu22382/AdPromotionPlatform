@@ -65,6 +65,7 @@ An innovative **full-stack MERN** platform designed to connect **companies** wit
 - CLOUDINARY_CLOUD_NAME=your_cloud_name
 - CLOUDINARY_API_KEY=your_api_key
 - CLOUDINARY_API_SECRET=your_api_secret
+---
 
 **API Endpoints**
 
@@ -78,3 +79,46 @@ An innovative **full-stack MERN** platform designed to connect **companies** wit
 | POST   | `/api/auth/forgot-password`       | Send reset email            |
 | POST   | `/api/auth/reset-password/:token` | Reset password              |
 
+**Campaign Routes**
+
+| Method | Endpoint                | Description               |
+| ------ | ----------------------- | ------------------------- |
+| POST   | `/api/campaigns`        | Create new campaign       |
+| GET    | `/api/campaigns`        | Get all campaigns         |
+| PUT    | `/api/campaigns/:id`    | Update a campaign         |
+| DELETE | `/api/campaigns/:id`    | Delete a campaign         |
+| POST   | `/api/campaigns/assign` | Assign campaign to driver |
+
+
+**Cab Driver Routes**
+
+| Method | Endpoint                       | Description              |
+| ------ | ------------------------------ | ------------------------ |
+| POST   | `/api/cab-driver/upload-docs`  | Upload driver documents  |
+| GET    | `/api/cab-driver/campaigns`    | Get assigned campaigns   |
+| POST   | `/api/cab-driver/download-pdf` | Download ad creative PDF |
+
+
+---
+
+
+**Project Structure**
+
+AdPromotion/
+│
+├── backend/
+│   ├── config/         # Database & Passport setup
+│   ├── controllers/    # API business logic
+│   ├── models/         # Mongoose schemas
+│   ├── routes/         # API routes
+│   ├── lib/            # Utilities (email, pdf, etc.)
+│   ├── server.js       # App entry point
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/      # Page-level components
+│   │   ├── components/ # UI components
+│   │   ├── lib/        # Axios API client
+│
+└── README.md
+---
