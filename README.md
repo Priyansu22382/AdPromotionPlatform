@@ -67,7 +67,8 @@ An innovative **full-stack MERN** platform designed to connect **companies** wit
 - CLOUDINARY_API_SECRET=your_api_secret
 
 **API Endpoints**
-*Authentication Routes*
+
+**Authentication Routes**
 | Method | Endpoint                          | Description                 |
 | ------ | --------------------------------- | --------------------------- |
 | POST   | `/api/auth/company/signup`        | Register a new company      |
