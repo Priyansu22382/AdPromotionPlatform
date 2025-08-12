@@ -101,24 +101,16 @@ An innovative **full-stack MERN** platform designed to connect **companies** wit
 
 ---
 
+**Run Backend**
 
-**Project Structure**
+- cd Backend
+- npm run dev
 
-AdPromotion/
-│
-├── backend/
-│   ├── config/         # Database & Passport setup
-│   ├── controllers/    # API business logic
-│   ├── models/         # Mongoose schemas
-│   ├── routes/         # API routes
-│   ├── lib/            # Utilities (email, pdf, etc.)
-│   ├── server.js       # App entry point
-│
-├── frontend/
-│   ├── src/
-│   │   ├── pages/      # Page-level components
-│   │   ├── components/ # UI components
-│   │   ├── lib/        # Axios API client
-│
-└── README.md
+---
+
+**Run Frontend**
+
+- cd Frontend
+- npm run dev
+
 ---
