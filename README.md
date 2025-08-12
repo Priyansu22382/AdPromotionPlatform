@@ -66,3 +66,14 @@ An innovative **full-stack MERN** platform designed to connect **companies** wit
 - CLOUDINARY_API_KEY=your_api_key
 - CLOUDINARY_API_SECRET=your_api_secret
 
+**API Endpoints**
+*Authentication Routes*
+| Method | Endpoint                          | Description                 |
+| ------ | --------------------------------- | --------------------------- |
+| POST   | `/api/auth/company/signup`        | Register a new company      |
+| POST   | `/api/auth/cab-driver/signup`     | Register a new cab driver   |
+| POST   | `/api/auth/login`                 | Login for company or driver |
+| GET    | `/api/auth/google`                | Google OAuth login          |
+| POST   | `/api/auth/forgot-password`       | Send reset email            |
+| POST   | `/api/auth/reset-password/:token` | Reset password              |
+
