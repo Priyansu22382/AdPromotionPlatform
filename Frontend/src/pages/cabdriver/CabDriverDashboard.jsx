@@ -355,7 +355,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { axiosInstance } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import html2pdf from "html2pdf.js";
-import { ShieldCheck, LogOut, FileText } from "lucide-react";
+import { ShieldCheck, FileText } from "lucide-react";
 
 const CabDriverDashboard = () => {
   const [assignedAds, setAssignedAds] = useState([]);
@@ -398,15 +398,6 @@ const CabDriverDashboard = () => {
       setCabDriver(prev => ({ ...prev, isAvailable: res.data.isAvailable }));
     } catch (err) {
       console.error("Error toggling availability", err);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await axiosInstance.post("/auth/cab-driver/logout", {}, { withCredentials: true });
-      navigate("/login");
-    } catch (err) {
-      console.error("Logout error", err);
     }
   };
 
@@ -453,13 +444,6 @@ const CabDriverDashboard = () => {
               </p>
             </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center space-x-2 bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-900/70 active:scale-95"
-          >
-            <LogOut size={20} />
-            <span>Logout</span>
-          </button>
         </header>
         
         {/* Driver Info Card */}
@@ -499,7 +483,7 @@ const CabDriverDashboard = () => {
             <p className="text-gray-400 text-lg">No ads assigned yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {assignedAds.map(ad => (
               <div 
                 key={ad._id} 
