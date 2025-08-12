@@ -109,7 +109,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../lib/axios";
-import { PlusCircle, FileText, BarChart2, LogOut, ShieldCheck, Layers, Bell } from "lucide-react";
+import { PlusCircle, FileText, BarChart2, ShieldCheck, Layers, Car, Tags, CalendarDays } from "lucide-react";
 
 const CompanyDashboard = () => {
   const [ads, setAds] = useState([]);
@@ -128,91 +128,84 @@ const CompanyDashboard = () => {
     fetchAds();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await axiosInstance.post("/auth/company/logout", {}, { withCredentials: true });
-      navigate("/login");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
-  };
-
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-950 to-black text-gray-200">
-      {/* Animated background overlay */}
-      <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
+    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-900 to-black text-gray-200 font-sans">
+      {/* Background pattern */}
+      <div className="absolute inset-0 z-0 bg-[url('https://www.transparenttextures.com/patterns/dark-mosaic.png')] opacity-20" />
 
-      {/* Main Content */}
-      <div className="z-10 w-full max-w-5xl">
-        <header className="flex justify-between items-center mb-10 p-4 border-b border-gray-700">
-          <div className="flex items-center space-x-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-400/10 text-teal-400 shadow-lg shadow-teal-900/50">
-              <ShieldCheck size={32} strokeWidth={2} />
+      {/* Main Content Container */}
+      <div className="z-10 w-full max-w-6xl px-4 md:px-8 py-10">
+        <header className="flex flex-col md:flex-row items-center justify-between mb-12">
+          <div className="flex items-center space-x-5 mb-6 md:mb-0">
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-teal-400/20 text-teal-400 shadow-xl shadow-teal-900/40">
+              <ShieldCheck size={40} strokeWidth={2} />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white drop-shadow-sm">Welcome Back</h1>
-              <p className="mt-1 text-gray-400">
-                Manage your ad campaigns and connect with cab drivers.
+              <h1 className="text-5xl font-extrabold text-white tracking-tight drop-shadow-md">Welcome Back!</h1>
+              <p className="mt-2 text-gray-400 text-lg">
+                Your ad campaign management hub.
               </p>
             </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="text-gray-400 hover:text-teal-400 transition-colors">
-                <Bell size={24} />
-            </button>
-            <button
-              onClick={handleLogout}
-              className="flex items-center space-x-2 bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-red-900/70 active:scale-95"
-            >
-              <LogOut size={20} />
-              <span>Logout</span>
-            </button>
           </div>
         </header>
 
         {/* Action and Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {/* Create Ad Card */}
           <Link
             to="/company/create-ad"
-            className="group bg-gray-900/50 rounded-2xl border border-gray-800 p-8 shadow-xl shadow-gray-950/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-teal-900/50"
+            className="group relative overflow-hidden bg-gray-800/80 rounded-3xl border border-gray-700 p-8 shadow-2xl shadow-gray-950/50 transition-all duration-500 transform hover:scale-105 hover:shadow-teal-900/60"
           >
-            <PlusCircle className="text-teal-400 group-hover:text-white transition-colors" size={32} />
-            <h2 className="text-xl font-bold text-white mt-4">Create New Ad</h2>
-            <p className="text-sm text-gray-400 mt-2">
-              Publish a new ad campaign with custom budget, city, and vehicle types.
-            </p>
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent transition-opacity duration-500 group-hover:opacity-100 opacity-0" />
+            <div className="relative z-10">
+              <PlusCircle className="text-teal-400 group-hover:text-white transition-colors duration-300" size={36} />
+              <h2 className="text-2xl font-bold text-white mt-5">Create New Ad</h2>
+              <p className="text-sm text-gray-400 mt-2">
+                Publish a new ad campaign with a custom budget and vehicle type.
+              </p>
+            </div>
           </Link>
 
           {/* View Ads Card */}
           <Link
             to="/company/ads"
-            className="group bg-gray-900/50 rounded-2xl border border-gray-800 p-8 shadow-xl shadow-gray-950/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-teal-900/50"
+            className="group relative overflow-hidden bg-gray-800/80 rounded-3xl border border-gray-700 p-8 shadow-2xl shadow-gray-950/50 transition-all duration-500 transform hover:scale-105 hover:shadow-teal-900/60"
           >
-            <FileText className="text-teal-400 group-hover:text-white transition-colors" size={32} />
-            <h2 className="text-xl font-bold text-white mt-4">View My Ads</h2>
-            <p className="text-sm text-gray-400 mt-2">
-              Check all ads you've created, their current status, and edit or delete them.
-            </p>
+            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent transition-opacity duration-500 group-hover:opacity-100 opacity-0" />
+            <div className="relative z-10">
+              <FileText className="text-teal-400 group-hover:text-white transition-colors duration-300" size={36} />
+              <h2 className="text-2xl font-bold text-white mt-5">View My Ads</h2>
+              <p className="text-sm text-gray-400 mt-2">
+                Check all your created ads, their current status, and manage them.
+              </p>
+            </div>
           </Link>
 
           {/* Engagement Stats Card */}
-          <div className="bg-gray-900/50 rounded-2xl border border-gray-800 p-8 shadow-xl shadow-gray-950/50">
-            <BarChart2 className="text-teal-400" size={32} />
-            <h2 className="text-xl font-bold text-white mt-4">Engagement Stats</h2>
-            <p className="text-sm text-gray-400 mt-2">
-              Total Views: <span className="font-semibold text-teal-400">12,340</span><br />
-              Clicks: <span className="font-semibold text-teal-400">3,210</span><br />
-              Active Ads: <span className="font-semibold text-teal-400">{ads.filter(ad => ad.status === "Approved").length}</span>
-            </p>
+          <div className="group relative overflow-hidden bg-gray-800/80 rounded-3xl border border-gray-700 p-8 shadow-2xl shadow-gray-950/50">
+            <div className="relative z-10">
+              <BarChart2 className="text-teal-400" size={36} />
+              <h2 className="text-2xl font-bold text-white mt-5">Engagement Stats</h2>
+              <p className="text-sm text-gray-400 mt-2 space-y-1">
+                <span className="flex items-center space-x-2">
+                  <Tags size={16} /> <span className="font-semibold text-teal-400">Total Views:</span> 12,340
+                </span>
+                <span className="flex items-center space-x-2">
+                  <PlusCircle size={16} /> <span className="font-semibold text-teal-400">Clicks:</span> 3,210
+                </span>
+                <span className="flex items-center space-x-2">
+                  <CalendarDays size={16} /> <span className="font-semibold text-teal-400">Active Ads:</span> {ads.filter(ad => ad.status === "Approved").length}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Assigned Drivers */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-white mb-6">🚗 Assigned Cab Drivers</h2>
+        {/* Assigned Drivers Section */}
+        <div>
+          <h2 className="text-3xl font-bold text-white mb-6 tracking-tight">🚗 Assigned Cab Drivers</h2>
           {ads.filter(ad => ad.status === "Approved" && ad.assignedDrivers.length > 0).length === 0 ? (
-            <div className="p-8 bg-gray-900/50 rounded-2xl text-center border border-gray-800">
+            <div className="p-8 bg-gray-800/80 rounded-2xl text-center border border-gray-700 shadow-lg">
                 <p className="text-gray-400 text-lg">No assigned cab drivers yet.</p>
             </div>
           ) : (
@@ -220,11 +213,14 @@ const CompanyDashboard = () => {
                 {ads
                 .filter(ad => ad.status === "Approved" && ad.assignedDrivers.length > 0)
                 .map((ad, index) => (
-                    <div key={index} className="bg-gray-900/50 rounded-2xl shadow-xl shadow-gray-950/50 border border-gray-800 p-6 transition-all duration-300 hover:scale-[1.01] hover:shadow-teal-900/50">
-                    <h3 className="text-lg font-bold text-teal-400 mb-3">📌 Ad: {ad.adTitle}</h3>
-                    <ul className="divide-y divide-gray-800">
+                    <div key={index} className="bg-gray-800/80 rounded-2xl shadow-xl shadow-gray-950/50 border border-gray-700 p-6 transition-all duration-300 hover:scale-[1.01] hover:shadow-teal-900/50">
+                    <h3 className="text-xl font-bold text-teal-400 mb-4 flex items-center space-x-2">
+                      <Car size={20} />
+                      <span>Ad: {ad.adTitle}</span>
+                    </h3>
+                    <ul className="divide-y divide-gray-700">
                         {ad.assignedDrivers.map((driver, idx) => (
-                        <li key={idx} className="py-3 flex justify-between items-center">
+                        <li key={idx} className="py-4 flex justify-between items-center">
                             <div>
                             <p className="font-semibold text-white">Driver: <span className="font-normal text-gray-300">{driver.name}</span></p>
                             <p className="text-sm text-gray-400">Vehicle: {driver.vehicleNumber} ({driver.platform})</p>
@@ -246,3 +242,4 @@ const CompanyDashboard = () => {
 };
 
 export default CompanyDashboard;
+

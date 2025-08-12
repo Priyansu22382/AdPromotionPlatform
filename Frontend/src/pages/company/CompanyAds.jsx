@@ -624,10 +624,249 @@
 
 // export default CompanyAds;
 
+// import React, { useEffect, useState } from "react";
+// import { axiosInstance } from "../../lib/axios";
+// import { useNavigate } from "react-router-dom";
+// import { FileText, Search, Filter, Pencil, Trash, XCircle, CheckCircle, Clock } from "lucide-react";
+
+// // Placeholder for a custom modal/toast component.
+// const showCustomConfirmation = (message) => {
+//   return window.confirm(message);
+// };
+
+// const showErrorMessage = (message) => {
+//   console.error("Error:", message);
+//   // Replace with a custom modal/toast
+// };
+
+// const CompanyAds = () => {
+//   const [ads, setAds] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [errorMsg, setErrorMsg] = useState("");
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [statusFilter, setStatusFilter] = useState("All");
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     fetchCompanyAds();
+//   }, []);
+
+//   const fetchCompanyAds = async () => {
+//     try {
+//       const res = await axiosInstance.get("/ad/getCompanyAd");
+//       const updatedAds = res.data.map(ad => {
+//         if (ad.status === "Approved") {
+//           const createdDate = new Date(ad.createdAt);
+//           const expiryDate = new Date(createdDate);
+//           expiryDate.setDate(createdDate.getDate() + ad.durationInDays);
+//           const today = new Date();
+//           if (today > expiryDate) {
+//             ad.status = "Completed";
+//           }
+//         }
+//         return ad;
+//       });
+//       setAds(updatedAds);
+//     } catch (err) {
+//       console.error("Error fetching company ads:", err);
+//       setErrorMsg("Failed to load your ads. Please try again.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const handleEdit = (adId) => {
+//     navigate(`/company/edit-ad/${adId}`);
+//   };
+
+//   const handleDelete = async (adId) => {
+//     const confirmDelete = showCustomConfirmation("Are you sure you want to delete this ad?");
+//     if (!confirmDelete) return;
+
+//     try {
+//       await axiosInstance.delete(`/ad/${adId}`);
+//       fetchCompanyAds(); // Refresh ads after delete
+//     } catch (err) {
+//       console.error("Delete failed:", err);
+//       showErrorMessage("Error deleting ad.");
+//     }
+//   };
+
+//   const getStatusColor = (status) => {
+//     switch (status) {
+//       case "Pending":
+//         return "text-yellow-400";
+//       case "Approved":
+//         return "text-green-400";
+//       case "Rejected":
+//         return "text-red-400";
+//       case "Completed":
+//         return "text-blue-400";
+//       default:
+//         return "text-gray-400";
+//     }
+//   };
+
+//   const filteredAds = ads.filter((ad) => {
+//     const matchesSearch = ad.adTitle.toLowerCase().includes(searchTerm.toLowerCase());
+//     const matchesStatus = statusFilter === "All" || ad.status === statusFilter;
+//     return matchesSearch && matchesStatus;
+//   });
+
+//   return (
+//     <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-900 to-black text-gray-200">
+//       {/* Animated background overlay */}
+//       <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
+
+//       <div className="z-10 w-full max-w-5xl">
+//         <div className="flex items-center space-x-4 mb-8 p-4 border-b border-gray-700">
+//           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white shadow-lg shadow-purple-900/50">
+//             <FileText size={32} strokeWidth={2} />
+//           </div>
+//           <div>
+//             <h2 className="text-3xl font-bold text-white drop-shadow-sm">Your Ad History</h2>
+//             <p className="mt-1 text-gray-400">
+//               View and manage all your ad campaigns.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Filters */}
+//         <div className="flex flex-col md:flex-row gap-4 mb-8 justify-between">
+//           <div className="relative w-full md:w-1/3">
+//             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+//             <input
+//               type="text"
+//               placeholder="Search by title..."
+//               value={searchTerm}
+//               onChange={(e) => setSearchTerm(e.target.value)}
+//               className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
+//             />
+//           </div>
+//           <div className="relative w-full md:w-40">
+//             <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+//             <select
+//               value={statusFilter}
+//               onChange={(e) => setStatusFilter(e.target.value)}
+//               className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
+//             >
+//               <option value="All" className="bg-gray-800">All</option>
+//               <option value="Pending" className="bg-gray-800">Pending</option>
+//               <option value="Approved" className="bg-gray-800">Approved</option>
+//               <option value="Rejected" className="bg-gray-800">Rejected</option>
+//               <option value="Completed" className="bg-gray-800">Completed</option>
+//             </select>
+//           </div>
+//         </div>
+
+//         {loading ? (
+//           <p className="text-gray-400 text-center">Loading ads...</p>
+//         ) : errorMsg ? (
+//           <p className="text-red-400 text-center">{errorMsg}</p>
+//         ) : filteredAds.length === 0 ? (
+//           <p className="text-gray-400 text-center">No ads found matching the criteria.</p>
+//         ) : (
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//             {filteredAds.map((ad) => {
+//               const startDate = new Date(ad.createdAt);
+//               const endDate = new Date(startDate);
+//               endDate.setDate(startDate.getDate() + ad.durationInDays);
+//               const status = ad.status;
+
+//               return (
+//                 <div
+//                   key={ad._id}
+//                   className="bg-gray-800/60 rounded-xl border border-gray-700 p-6 shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-purple-900/70"
+//                 >
+//                   <div className="flex items-center justify-between">
+//                     <h3 className="text-lg font-semibold text-white">{ad.adTitle}</h3>
+//                     <div className={`flex items-center space-x-1 text-sm font-medium ${getStatusColor(status)}`}>
+//                       {status === "Pending" && <Clock size={16} />}
+//                       {status === "Approved" && <CheckCircle size={16} />}
+//                       {status === "Rejected" && <XCircle size={16} />}
+//                       {status === "Completed" && <FileText size={16} />}
+//                       <span>{status}</span>
+//                     </div>
+//                   </div>
+
+//                   <img
+//                     src={ad.adImage}
+//                     alt="Ad"
+//                     className="mt-4 h-48 w-full object-cover rounded-xl"
+//                   />
+
+//                   <p className="text-sm text-gray-400 mt-4">{ad.description}</p>
+
+//                   <div className="mt-4 text-sm text-gray-400 space-y-1">
+//                     <p>
+//                       <strong>Duration:</strong> {ad.durationInDays} days
+//                     </p>
+//                     <p>
+//                       <strong>Vehicles:</strong> {ad.totalVehicles}
+//                     </p>
+//                     <p>
+//                       <strong>Price/Vehicle:</strong> ₹{ad.pricePerVehicle}
+//                     </p>
+//                     <p>
+//                       <strong>Total Amount:</strong> ₹{ad.totalAmount}
+//                     </p>
+//                     <p>
+//                       <strong>Start Date:</strong> {startDate.toLocaleDateString()}
+//                     </p>
+//                     <p>
+//                       <strong>End Date:</strong> {endDate.toLocaleDateString()}
+//                     </p>
+//                   </div>
+
+//                   {status === "Approved" && ad.assignedDrivers?.length > 0 && (
+//                     <div className="mt-4">
+//                       <strong className="text-white">Assigned Drivers:</strong>
+//                       <ul className="list-disc ml-6 text-sm text-gray-400 mt-1">
+//                         {ad.assignedDrivers.map((driver) => (
+//                           <li key={driver._id}>
+//                             {driver.name} — {driver.vehicleNumber} ({driver.platform})
+//                           </li>
+//                         ))}
+//                       </ul>
+//                     </div>
+//                   )}
+
+//                   {(status === "Pending" || status === "Rejected") && (
+//                     <div className="mt-4 flex gap-3">
+//                       {status === "Pending" && (
+//                         <button
+//                           onClick={() => handleEdit(ad._id)}
+//                           className="flex items-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-purple-600 to-indigo-700 text-white rounded-xl font-semibold shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-purple-900/70 active:scale-95"
+//                         >
+//                           <Pencil size={16} />
+//                           <span>Edit</span>
+//                         </button>
+//                       )}
+//                       <button
+//                         onClick={() => handleDelete(ad._id)}
+//                         className="flex items-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl font-semibold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-red-900/70 active:scale-95"
+//                       >
+//                         <Trash size={16} />
+//                         <span>Delete</span>
+//                       </button>
+//                     </div>
+//                   )}
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default CompanyAds;
+
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
-import { FileText, Search, Filter, Pencil, Trash, XCircle, CheckCircle, Clock } from "lucide-react";
+import { FileText, Search, Filter, Pencil, Trash, XCircle, CheckCircle, Clock, CalendarDays, Tags, Car } from "lucide-react";
 
 // Placeholder for a custom modal/toast component.
 const showCustomConfirmation = (message) => {
@@ -714,22 +953,25 @@ const CompanyAds = () => {
   });
 
   return (
-    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-900 to-black text-gray-200">
-      {/* Animated background overlay */}
-      <div className="absolute inset-0 z-0 animate-pulse bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
+    <div className="min-h-screen w-screen flex flex-col items-center p-6 bg-gradient-to-br from-gray-900 to-black text-gray-200 font-sans">
+      {/* Background pattern */}
+      <div className="absolute inset-0 z-0 bg-[url('https://www.transparenttextures.com/patterns/dark-mosaic.png')] opacity-20" />
 
-      <div className="z-10 w-full max-w-5xl">
-        <div className="flex items-center space-x-4 mb-8 p-4 border-b border-gray-700">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white shadow-lg shadow-purple-900/50">
-            <FileText size={32} strokeWidth={2} />
+      {/* Main Content Container */}
+      <div className="z-10 w-full max-w-6xl px-4 md:px-8 py-10">
+        <header className="flex flex-col md:flex-row items-center justify-between mb-12">
+          <div className="flex items-center space-x-5 mb-6 md:mb-0">
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-teal-400/20 text-teal-400 shadow-xl shadow-teal-900/40">
+              <FileText size={36} strokeWidth={2} />
+            </div>
+            <div>
+              <h1 className="text-4xl font-extrabold text-white tracking-tight drop-shadow-md">Your Ad History</h1>
+              <p className="mt-2 text-gray-400 text-lg">
+                View and manage all your ad campaigns.
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-3xl font-bold text-white drop-shadow-sm">Your Ad History</h2>
-            <p className="mt-1 text-gray-400">
-              View and manage all your ad campaigns.
-            </p>
-          </div>
-        </div>
+        </header>
 
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4 mb-8 justify-between">
@@ -740,7 +982,7 @@ const CompanyAds = () => {
               placeholder="Search by title..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white placeholder-gray-500 backdrop-blur-sm transition-all duration-300 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
           <div className="relative w-full md:w-40">
@@ -748,7 +990,7 @@ const CompanyAds = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500"
+              className="w-full rounded-xl border border-gray-700 bg-gray-900/50 py-3 pl-12 pr-4 text-white backdrop-blur-sm transition-all duration-300 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             >
               <option value="All" className="bg-gray-800">All</option>
               <option value="Pending" className="bg-gray-800">Pending</option>
@@ -766,7 +1008,7 @@ const CompanyAds = () => {
         ) : filteredAds.length === 0 ? (
           <p className="text-gray-400 text-center">No ads found matching the criteria.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredAds.map((ad) => {
               const startDate = new Date(ad.createdAt);
               const endDate = new Date(startDate);
@@ -776,10 +1018,11 @@ const CompanyAds = () => {
               return (
                 <div
                   key={ad._id}
-                  className="bg-gray-800/60 rounded-xl border border-gray-700 p-6 shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-purple-900/70"
+                  className="group relative overflow-hidden bg-gray-800/80 rounded-3xl border border-gray-700 p-6 shadow-xl shadow-gray-950/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-teal-900/50"
                 >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-white">{ad.adTitle}</h3>
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent transition-opacity duration-500 group-hover:opacity-100 opacity-0" />
+                  <div className="relative z-10 flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-semibold text-white">{ad.adTitle}</h3>
                     <div className={`flex items-center space-x-1 text-sm font-medium ${getStatusColor(status)}`}>
                       {status === "Pending" && <Clock size={16} />}
                       {status === "Approved" && <CheckCircle size={16} />}
@@ -792,36 +1035,38 @@ const CompanyAds = () => {
                   <img
                     src={ad.adImage}
                     alt="Ad"
-                    className="mt-4 h-48 w-full object-cover rounded-xl"
+                    className="mt-4 h-48 w-full object-cover rounded-xl shadow-lg"
                   />
 
                   <p className="text-sm text-gray-400 mt-4">{ad.description}</p>
 
                   <div className="mt-4 text-sm text-gray-400 space-y-1">
-                    <p>
-                      <strong>Duration:</strong> {ad.durationInDays} days
+                    <p className="flex items-center space-x-2">
+                      <CalendarDays size={16} className="text-teal-400" />
+                      <span><strong>Duration:</strong> {ad.durationInDays} days</span>
                     </p>
-                    <p>
-                      <strong>Vehicles:</strong> {ad.totalVehicles}
+                    <p className="flex items-center space-x-2">
+                      <Car size={16} className="text-teal-400" />
+                      <span><strong>Vehicles:</strong> {ad.totalVehicles}</span>
                     </p>
-                    <p>
-                      <strong>Price/Vehicle:</strong> ₹{ad.pricePerVehicle}
+                    <p className="flex items-center space-x-2">
+                      <Tags size={16} className="text-teal-400" />
+                      <span><strong>Price/Vehicle:</strong> ₹{ad.pricePerVehicle}</span>
                     </p>
-                    <p>
-                      <strong>Total Amount:</strong> ₹{ad.totalAmount}
+                    <p className="flex items-center space-x-2">
+                      <CalendarDays size={16} className="text-teal-400" />
+                      <span><strong>Start Date:</strong> {new Date(ad.createdAt).toLocaleDateString()}</span>
                     </p>
-                    <p>
-                      <strong>Start Date:</strong> {startDate.toLocaleDateString()}
-                    </p>
-                    <p>
-                      <strong>End Date:</strong> {endDate.toLocaleDateString()}
+                    <p className="flex items-center space-x-2">
+                      <CalendarDays size={16} className="text-teal-400" />
+                      <span><strong>End Date:</strong> {endDate.toLocaleDateString()}</span>
                     </p>
                   </div>
 
                   {status === "Approved" && ad.assignedDrivers?.length > 0 && (
-                    <div className="mt-4">
+                    <div className="mt-4 border-t border-gray-700 pt-4">
                       <strong className="text-white">Assigned Drivers:</strong>
-                      <ul className="list-disc ml-6 text-sm text-gray-400 mt-1">
+                      <ul className="list-disc ml-6 text-sm text-gray-400 mt-2 space-y-1">
                         {ad.assignedDrivers.map((driver) => (
                           <li key={driver._id}>
                             {driver.name} — {driver.vehicleNumber} ({driver.platform})
@@ -832,11 +1077,11 @@ const CompanyAds = () => {
                   )}
 
                   {(status === "Pending" || status === "Rejected") && (
-                    <div className="mt-4 flex gap-3">
+                    <div className="mt-6 flex flex-col sm:flex-row gap-3">
                       {status === "Pending" && (
                         <button
                           onClick={() => handleEdit(ad._id)}
-                          className="flex items-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-purple-600 to-indigo-700 text-white rounded-xl font-semibold shadow-lg shadow-purple-900/50 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-purple-900/70 active:scale-95"
+                          className="flex items-center justify-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-teal-600 to-cyan-700 text-white rounded-xl font-semibold shadow-lg shadow-teal-900/50 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-teal-900/70 active:scale-95"
                         >
                           <Pencil size={16} />
                           <span>Edit</span>
@@ -844,7 +1089,7 @@ const CompanyAds = () => {
                       )}
                       <button
                         onClick={() => handleDelete(ad._id)}
-                        className="flex items-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl font-semibold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-red-900/70 active:scale-95"
+                        className="flex items-center justify-center space-x-2 px-4 py-2 text-sm bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl font-semibold shadow-lg shadow-red-900/50 transition-all duration-300 hover:scale-[1.05] hover:shadow-xl hover:shadow-red-900/70 active:scale-95"
                       >
                         <Trash size={16} />
                         <span>Delete</span>
